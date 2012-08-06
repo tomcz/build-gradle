@@ -26,8 +26,11 @@ task init << {
     file('src/main/webapp/WEB-INF'),
     file('src/test/java'),
     file('src/test/resources'),
-  ].each { dir -> if (!dir.exists()) { dir.mkdirs() } }
-
+  ].each { dir ->
+    if (!dir.exists()) {
+      dir.mkdirs()
+    }
+  }
   def webxml = file('src/main/webapp/WEB-INF/web.xml')
   def webapp = '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<web-app xmlns="http://java.sun.com/xml/ns/javaee"\n' +
@@ -35,5 +38,7 @@ task init << {
     '         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"\n' +
     '         version="2.5">\n' +
     '</web-app>\n'
-  if (!webxml.exists()) { webxml.write(webapp, 'UTF-8') }
+  if (!webxml.exists()) {
+    webxml.write(webapp, 'UTF-8')
+  }
 }
