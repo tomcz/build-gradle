@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+defaultTasks 'clean', 'build'
+
+repositories {
+  mavenCentral()
+}
+
+configurations.all {
+  exclude(group: 'commons-logging')
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-simple:1.6.6'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.0'
+}
+
+task init << {
+  [
+    file('src/main/java'),
+    file('src/main/resources'),
+    file('src/test/java'),
+    file('src/test/resources'),
+  ].each { dir ->
+    if (!dir.exists()) {
+      dir.mkdirs()
+    }
+  }
+}
